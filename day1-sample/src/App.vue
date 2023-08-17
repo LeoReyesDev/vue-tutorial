@@ -19,6 +19,7 @@
 
       <div v-if="items.length === 0">No items added yet.</div>
     </section>
+    <router-view />
   </div>
 </template>
 
@@ -26,7 +27,7 @@
 export default {
   data() {
     return {
-      message: "Day 1 Vue Sample App",
+      message: "Day 2 Vue Sample App Routers",
       newItem: "",
       items: [],
       nextId: 1,
