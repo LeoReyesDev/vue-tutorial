@@ -3,7 +3,10 @@
     <header>
       <h1>{{ message }}</h1>
     </header>
-
+    <nav>
+      <router-link to="/products">Products</router-link> |
+      <router-link to="/cart">Shopping Cart</router-link>
+    </nav>
     <section>
       <input
         v-model="newItem"
@@ -91,5 +94,9 @@ button {
 
 button:hover {
   background-color: #d32f2f;
+}
+nav a.router-link-exact-active {
+  font-weight: bold;
+  color: green;
 }
 </style>
