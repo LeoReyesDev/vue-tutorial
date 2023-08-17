@@ -3,6 +3,7 @@
 # **7-Day Vue.js Intensive Course**
 
 Kickstart your Vue.js journey with this intensive 7-day course, covering everything from the basics to more advanced topics. By the end of the course, you'll have built a complete CRUD web app using Vue.js and Node.js.
+this is the link for you can following with more details about the course. https://leoreyesdevlabs.com/blog/2023/08/one-week-intensive-program-to-learn-vue-js-and-build-a-crud-web-app-with-node-js/
 
 ## **Course Structure**:
 
