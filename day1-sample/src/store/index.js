@@ -1,72 +1,65 @@
 import { createStore } from 'vuex';
 
-const store = createStore({
-    state() {
-        return {
-            cart: JSON.parse(localStorage.getItem('shopping-cart')) || []
-        };
+function parsePrice(priceString) {
+    const price = parseFloat(priceString.replace("$", ""));
+    return isNaN(price) ? 0 : price; // Default to 0 if the price isn't valid
+}
+
+export default createStore({
+    state: {
+        cart: []
+    },
+    getters: {
+        cartProducts: state => state.cart,
+        cartItemCount: state => {
+            return state.cart.reduce((acc, product) => acc + product.quantity, 0);
+        },
+
+        cartTotalPrice: state => {
+            return state.cart.reduce((acc, product) => {
+                const productPrice = parsePrice(product.price); // Ensure price is a number, after parsing
+                const productQuantity = parseInt(product.quantity, 10) || 0; // Convert to int and default to 0 if NaN
+                return acc + productPrice * productQuantity;
+            }, 0);
+        }
     },
     mutations: {
         addToCart(state, product) {
-            state.cart.push(product);
-        },
-        removeFromCart(state, productId) {
-            const index = state.cart.findIndex(p => p.id === productId);
-            if (index !== -1) {
-                state.cart.splice(index, 1);
+            const productInCart = state.cart.find(p => p.id === product.id);
+            if (productInCart) {
+                productInCart.quantity++;
+            } else {
+                state.cart.push({ ...product, quantity: 1 });
             }
         },
         incrementProductQuantity(state, productId) {
             const product = state.cart.find(p => p.id === productId);
             if (product) {
-                product.quantity++;
+                product.quantity = (product.quantity || 0) + 1;
             }
         },
         decrementProductQuantity(state, productId) {
             const product = state.cart.find(p => p.id === productId);
             if (product && product.quantity > 0) {
                 product.quantity--;
-                if (product.quantity === 0) {
-                    this.commit('removeFromCart', productId);
-                }
             }
         },
-        saveCart(state) {
-            localStorage.setItem('shopping-cart', JSON.stringify(state.cart));
+        removeProductFromCart(state, productId) {
+            state.cart = state.cart.filter(p => p.id !== productId);
         }
     },
     actions: {
-        addProductToCart(context, product) {
-            context.commit('addToCart', product);
+        addProductToCart({ commit }, product) {
+            commit('addToCart', product);
         },
-        removeProductFromCart(context, productId) {
-            context.commit('removeFromCart', productId);
+        increaseQuantity({ commit }, productId) {
+            commit('incrementProductQuantity', productId);
         },
-        increaseQuantity(context, productId) {
-            context.commit('incrementProductQuantity', productId);
+        decreaseQuantity({ commit }, productId) {
+            commit('decrementProductQuantity', productId);
         },
-        decreaseQuantity(context, productId) {
-            context.commit('decrementProductQuantity', productId);
-        },
-        saveCartToLocalStorage(context) {
-            context.commit('saveCart');
-        }
-    },
-    getters: {
-        cartProducts(state) {
-            return state.cart;
-        },
-        cartItemCount(state) {
-            return state.cart.length;
-        },
-        cartTotalPrice(state) {
-            return state.cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+        removeProductFromCart({ commit }, productId) {
+            commit('removeProductFromCart', productId);
         }
     }
 });
-
-store.watch((state) => state.cart, () => {
-    store.dispatch('saveCartToLocalStorage');
-}, { deep: true });
-
-export default store;
