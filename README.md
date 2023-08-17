@@ -101,12 +101,6 @@ npm install
 npm run serve
 ```
 
-## **Course Completion Certificate**:
-
-Upon completion of the course, feel free to [contact us](#contact) to receive your certificate!
-
----
-
 ## **Contributors**:
 
 - [LeoReyesDev](github.com/leoreyesdev)
