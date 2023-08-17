@@ -1,5 +1,8 @@
 # day1-sample
 
+When u run yarn serve you have to see this screen
+![day01-vue-sample](https://github.com/LeoReyesDev/vue-tutorial/assets/19556132/f8f5f610-dd52-4dcf-a883-67d8590e2a00)
+
 ## Project setup
 ```
 yarn install
