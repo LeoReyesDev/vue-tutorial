@@ -1,4 +1,4 @@
-# day1-sample
+# day2-sample
 
 ## Project setup
 ```
