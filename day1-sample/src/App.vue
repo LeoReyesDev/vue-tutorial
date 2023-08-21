@@ -30,7 +30,7 @@
 export default {
   data() {
     return {
-      message: "Day 2 Vue Sample App Routers",
+      message: "Day 3 Vue Sample App Routers and shopping cart",
       newItem: "",
       items: [],
       nextId: 1,
