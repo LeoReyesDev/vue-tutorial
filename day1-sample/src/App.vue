@@ -4,10 +4,12 @@
       <h1>{{ message }}</h1>
     </header>
     <nav>
-      <router-link to="/products">Products</router-link> |
-      <router-link to="/cart">Shopping Cart</router-link>
+      <!-- <router-link to="/products">Products</router-link> |
+      <router-link to="/cart">Shopping Cart</router-link> -->
+      <router-link to="/dashboard">Day 04 | DashboardWidget </router-link>|
+      <router-link to="/items"> See Items</router-link>
     </nav>
-    <section>
+    <!-- <section>
       <input
         v-model="newItem"
         @keyup.enter="addItem"
@@ -21,7 +23,7 @@
       </ul>
 
       <div v-if="items.length === 0">No items added yet.</div>
-    </section>
+    </section> -->
     <router-view />
   </div>
 </template>
@@ -30,7 +32,7 @@
 export default {
   data() {
     return {
-      message: "Day 3 Vue Sample App Routers and shopping cart",
+      message: "Day 4 Vue Sample App | Saved Items in MongoDB with NODE",
       newItem: "",
       items: [],
       nextId: 1,
