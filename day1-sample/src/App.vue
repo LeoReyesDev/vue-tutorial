@@ -8,6 +8,7 @@
       <router-link to="/cart">Shopping Cart</router-link> -->
       <router-link to="/dashboard">Day 04 | DashboardWidget </router-link>|
       <router-link to="/items"> See Items</router-link>
+      <router-link to="/axios"> Call Items with axios</router-link>
     </nav>
     <!-- <section>
       <input
@@ -32,7 +33,7 @@
 export default {
   data() {
     return {
-      message: "Day 4 Vue Sample App | Saved Items in MongoDB with NODE",
+      message: "Day 5 Vue Sample App | call items from mongodb with AXIOS",
       newItem: "",
       items: [],
       nextId: 1,

@@ -52,15 +52,34 @@ async function deleteItem(itemId) {
     return result;
 }
 
-// API Endpoint to fetch all items
+// Function to edit an item in the database
+async function editItem(itemId, newName) {
+    const item = await Item.findById(itemId);
+    if (!item) {
+        return null; // Return null if item is not found
+    }
+    item.name = newName;
+    await item.save();
+    return item;
+}
+
+// Modified GET endpoint for pagination
 app.get('/items', async (req, res) => {
+    // Use a default of 0 for page if not specified
+    const page = req.query.page ? parseInt(req.query.page) : 0;
+
+    // Use a default of 10 for limit if not specified
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+
     try {
-        const items = await Item.find();
+        const items = await Item.find().skip(page * limit).limit(limit);
         res.json(items);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
+
 
 // API Endpoint to add a new item
 app.post('/items', async (req, res) => {
@@ -71,6 +90,21 @@ app.post('/items', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
+// API Endpoint to edit an item
+app.put('/items/:id', async (req, res) => {
+    try {
+        const updatedItem = await Item.findByIdAndUpdate(req.params.id, { name: req.body.name }, { new: true });
+        if (updatedItem) {
+            res.json(updatedItem);
+        } else {
+            res.status(404).json({ message: 'Item not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 
 // API Endpoint to delete an item
 app.delete('/items/:id', async (req, res) => {

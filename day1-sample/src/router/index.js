@@ -5,6 +5,7 @@ import ProductsItem from '../components/ProductsItem.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 import DashboardWidget from '../components/DashboardWidget.vue'
 import ItemsFromMongo from '../components/ItemsFromMongo.vue'
+import ItemsCallFromAxios from '../components/ItemsCallFromAxios.vue'
 
 const routes = [
     {
@@ -21,7 +22,8 @@ const routes = [
     { path: '/products', component: ProductsItem },
     { path: '/cart', component: ShoppingCart },
     { path: '/dashboard', component: DashboardWidget },
-    { path: '/items', component: ItemsFromMongo }
+    { path: '/items', component: ItemsFromMongo },
+    { path: '/axios', component: ItemsCallFromAxios }
 ]
 
 const router = createRouter({
